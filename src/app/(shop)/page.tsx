@@ -2,9 +2,8 @@ import { titleFont } from '@/config/fonts'
 
 export default function Home() {
   return (
-    <main>
-      <h1>Hola mundo</h1>
+    <div>
       <h1 className={titleFont.className}>Hola mundo</h1>
-    </main>
+    </div>
   )
 }
