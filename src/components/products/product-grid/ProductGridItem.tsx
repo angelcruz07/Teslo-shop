@@ -28,10 +28,10 @@ export const ProductGridItem = ({ product }: Props) => {
 					height={500}
 					width={500}
 					onMouseLeave={() => {
-						setDisplayImage(product.images[1])
+						setDisplayImage(product.images[0])
 					}}
 					onMouseEnter={() => {
-						setDisplayImage(product.images[0])
+						setDisplayImage(product.images[1])
 					}}
 				/>
 			</Link>
