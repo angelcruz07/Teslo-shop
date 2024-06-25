@@ -1,14 +1,15 @@
-import { TopMenu } from '@/components'
+import { Sidebar, TopMenu } from '@/components'
 
 export default function ShopLayout({
-  children
+	children
 }: Readonly<{
-  children: React.ReactNode
+	children: React.ReactNode
 }>) {
-  return (
-    <main className='min-h-screen px-5'>
-      <TopMenu />
-      <div className='px-0 sm:px-10'>{children}</div>
-    </main>
-  )
+	return (
+		<main className='min-h-screen px-5'>
+			<TopMenu />
+			<Sidebar />
+			<div className='px-0 sm:px-10'>{children}</div>
+		</main>
+	)
 }
