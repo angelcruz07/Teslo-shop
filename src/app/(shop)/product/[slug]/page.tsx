@@ -1,4 +1,4 @@
-import { SizeSelector } from '@/components'
+import { QuantitySelector, SizeSelector } from '@/components'
 import { titleFont } from '@/config/fonts'
 import { initialData } from '@/seed/seed'
 import { notFound } from 'next/navigation'
@@ -38,6 +38,7 @@ export default function ({ params }: Props) {
         />
 
         {/* Selector de cantidad */}
+        <QuantitySelector quantity={2} />
 
         <button className-='btn-primary my-5'>Añadir al carrito</button>
 
