@@ -14,7 +14,7 @@ export const SizeSelector = ({ selectedSize, availableSizes }: Props) => {
       <div>
         {availableSizes.map((size) => (
           <button
-            className={clsx('mx-2 hover:underline text-lg', {
+            className={clsx('mx-2 hover:underline text-lg font-semibold', {
               underline: size === selectedSize
             })}
             key={size}>
