@@ -1,4 +1,5 @@
 'use client'
+import { useUIStore } from '@/store'
 import {
 	IconLogin,
 	IconLogout,
@@ -10,26 +11,40 @@ import {
 	IconX
 } from '@tabler/icons-react'
 import Link from 'next/link'
-import { useState } from 'react'
+import clxs from 'clsx'
 
 export const Sidebar = () => {
+	const isSideMenuOpen = useUIStore((state) => state.isSideMenuOpen)
+	const closeMenu = useUIStore((state) => state.closeSideMenu)
+
 	return (
 		<div>
 			{/* Backgroud black */}
-			<div className='fixed top-0 left-0 z-10 w-screen opacity-30 bg-black h-screen'></div>
+			{isSideMenuOpen && (
+				<div className='fixed top-0 left-0 z-10 w-screen opacity-30 bg-black h-screen' />
+			)}
 
 			{/* Blur */}
-			<div className='fade-in fixed top-0 left-0 w-screen z-10 backdrop-filter backdrop-blur-sm'></div>
+			{isSideMenuOpen && (
+				<div
+					onClick={closeMenu}
+					className='fade-in fixed top-0 left-0 w-screen z-10 backdrop-filter backdrop-blur-sm'
+				/>
+			)}
 
 			{/* Sidemenu */}
 			<nav
-				// todo: efecto slide
-				className='fixed p-5 right-0 top-0 w-[500px] h-screen bg-white z-10 shadow-2xl transfrom transition-all duration-300'>
+				className={clxs(
+					'fixed p-5 right-0 top-0 w-[500px] h-screen bg-white z-10 shadow-2xl transfrom transition-all duration-300',
+					{
+						'translate-x-full': !isSideMenuOpen
+					}
+				)}>
 				<IconX
 					stroke={2}
 					size={50}
 					className='absolute top-5 right-5 cursor-pointer'
-					onClick={() => console.log('click')}
+					onClick={closeMenu}
 				/>
 
 				{/* Input search */}
