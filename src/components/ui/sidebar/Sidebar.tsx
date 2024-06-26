@@ -1,5 +1,15 @@
 'use client'
-import { IconSearch, IconX } from '@tabler/icons-react'
+import {
+	IconLogin,
+	IconLogout,
+	IconSearch,
+	IconShirt,
+	IconTicket,
+	IconUser,
+	IconUsers,
+	IconX
+} from '@tabler/icons-react'
+import Link from 'next/link'
 import { useState } from 'react'
 
 export const Sidebar = () => {
@@ -31,6 +41,52 @@ export const Sidebar = () => {
 						className='w-full bg-gray-50 rounded pl-10 pr-10 broder-b-2 text-xl border-gray-200 focus:outline-none focus:border-blue-500'
 					/>
 				</div>
+				{/* Menu */}
+				<Link
+					href='/'
+					className='flex items-center mt-0 p-2 hover:bg-gray-100 rounded transition-all'>
+					<IconUser stroke={2} size={30} />
+					<span className='ml-3 text-xl'>Perfil</span>
+				</Link>
+				<Link
+					href='/'
+					className='flex items-center mt-0 p-2 hover:bg-gray-100 rounded transition-all'>
+					<IconTicket stroke={2} size={30} />
+					<span className='ml-3 text-xl'>Ordenes</span>
+				</Link>
+				<Link
+					href='/'
+					className='flex items-center mt-0 p-2 hover:bg-gray-100 rounded transition-all'>
+					<IconLogin stroke={2} size={30} />
+					<span className='ml-3 text-xl'>Ingresar</span>
+				</Link>
+				<Link
+					href='/'
+					className='flex items-center mt-0 p-2 hover:bg-gray-100 rounded transition-all'>
+					<IconLogout stroke={2} size={30} />
+					<span className='ml-3 text-xl'>Salir</span>
+				</Link>
+
+				{/* Line separator  */}
+				<div className='w-full h-px bg-gray-200 my-10' />
+				<Link
+					href='/'
+					className='flex items-center mt-0 p-2 hover:bg-gray-100 rounded transition-all'>
+					<IconShirt stroke={2} size={30} />
+					<span className='ml-3 text-xl'>Productos</span>
+				</Link>
+				<Link
+					href='/'
+					className='flex items-center mt-0 p-2 hover:bg-gray-100 rounded transition-all'>
+					<IconTicket stroke={2} size={30} />
+					<span className='ml-3 text-xl'>Ordenes</span>
+				</Link>
+				<Link
+					href='/'
+					className='flex items-center mt-0 p-2 hover:bg-gray-100 rounded transition-all'>
+					<IconUsers stroke={2} size={30} />
+					<span className='ml-3 text-xl'>Usuarios</span>
+				</Link>
 			</nav>
 		</div>
 	)
