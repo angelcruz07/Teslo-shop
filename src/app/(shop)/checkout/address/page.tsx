@@ -1,4 +1,4 @@
-export default function () {
+export default function Address() {
   return (
     <div>
       <h1>Address page</h1>
