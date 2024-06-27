@@ -1,4 +1,4 @@
-export default function () {
+export default function OrderDetail() {
   return (
     <div>
       <h1>Order Abcd</h1>
