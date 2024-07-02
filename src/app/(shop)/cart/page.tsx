@@ -67,7 +67,7 @@ export default function Cart() {
 
             <div>
               <Link
-                href='.checkout/address'
+                href='/checkout/address'
                 className='flex btn-primary justify-center'>
                 Checkout
               </Link>
