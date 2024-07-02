@@ -11,7 +11,7 @@ const productsInCart = [
 ]
 
 export default function Cart() {
-  redirect('/empty')
+  if (productsInCart.length === 0) redirect('/empty')
 
   return (
     <div className='flex justify-center items-center mb-72 px-10 sm:px-0'>
