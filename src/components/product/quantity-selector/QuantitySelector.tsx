@@ -1,31 +1,29 @@
-'use client'
-import { IconCircleMinus, IconCirclePlus } from '@tabler/icons-react'
-import { useState } from 'react'
+import { IconCircleMinus, IconCirclePlus } from "@tabler/icons-react";
 
 interface Props {
-  quantity: number
+  quantity: number;
+
+  onQuantityChanged: (value: number) => void;
 }
 
-export const QuantitySelector = ({ quantity }: Props) => {
-  const [count, setCount] = useState(quantity)
+export const QuantitySelector = ({ quantity, onQuantityChanged }: Props) => {
+  const onValueChange = (value: number) => {
+    if (quantity + value < 1) return;
 
-  const onQuantityChange = (value: number) => {
-    if (count < 1) return
-
-    setCount(count + value)
-  }
+    onQuantityChanged(quantity + value);
+  };
 
   return (
-    <div className='flex items-center'>
-      <button onClick={() => onQuantityChange(-1)}>
+    <div className="flex items-center">
+      <button onClick={() => onValueChange(-1)}>
         <IconCircleMinus stroke={2} size={30} />
       </button>
-      <span className='w-20 mx-3 px-5 bg-gray-200 text-center rounded'>
-        {count}
+      <span className="w-20 mx-3 px-5 bg-gray-200 text-center rounded">
+        {quantity}
       </span>
-      <button onClick={() => onQuantityChange(+1)}>
+      <button onClick={() => onValueChange(+1)}>
         <IconCirclePlus stroke={2} size={30} />
       </button>
     </div>
-  )
-}
+  );
+};
