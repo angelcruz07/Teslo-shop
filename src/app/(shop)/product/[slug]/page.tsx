@@ -4,12 +4,10 @@ import { getProductBySlug } from "@/actions";
 import {
   ProductMobileSlideshow,
   ProductSlideshow,
-  QuantitySelector,
-  SizeSelector,
   StockLabel,
 } from "@/components";
 import { titleFont } from "@/config/fonts";
-import { Metadata, ResolvingMetadata } from "next";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { AddToCart } from "./ui/AddToCart";
 
@@ -19,22 +17,20 @@ interface Props {
   };
 }
 
-export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata,
-): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const slug = params.slug;
   const product = await getProductBySlug(slug);
 
   // const previousImages = (await parent).openGraph?.images || [];
 
   return {
-    title: product?.title,
+    title: product?.title ?? "Producto no encontrado",
     description: product?.description ?? "",
     openGraph: {
-      title: product?.title,
+      title: product?.title ?? "Producto no encontrado",
       description: product?.description ?? "",
-      images: [`/products/${product?.images[2]}`],
+      // images: [], // https://misitioweb.com/products/image.png
+      images: [`/products/${product?.images[1]}`],
     },
   };
 }
@@ -43,7 +39,6 @@ export default async function ProductDetail({ params }: Props) {
   const { slug } = params;
 
   const product = await getProductBySlug(slug);
-  console.log(product);
 
   if (!product) {
     notFound();

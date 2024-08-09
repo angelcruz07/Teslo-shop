@@ -5,6 +5,7 @@ import Link from "next/link";
 import { QuantitySelector } from "@/components";
 import { useCartStore } from "@/store";
 import { useEffect, useState } from "react";
+import { ProductImage } from "@/components/product/product-image/product-image";
 
 export const ProductsInCart = () => {
   const updatedProductQuantity = useCartStore(
@@ -28,16 +29,18 @@ export const ProductsInCart = () => {
     <>
       {productsInCart.map((product) => (
         <div key={`${product.slug}-${product.size}`} className="flex mb-5">
-          <Image
-            src={`/products/${product.image[0]}`}
-            alt={product.title}
+          <ProductImage
+            src={product.image}
             width={100}
             height={100}
             style={{
               width: "100px",
               height: "100px",
             }}
+            alt={product.title}
+            className="mr-5 rounded"
           />
+
           <div>
             <Link
               className="hover:underline cursor-pointer"
