@@ -9,7 +9,7 @@ import {
   StockLabel,
 } from "@/components";
 import { titleFont } from "@/config/fonts";
-import { Metadata, ResolvedMetadata, ResolvingMetadata } from "next";
+import { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import { AddToCart } from "./ui/AddToCart";
 
