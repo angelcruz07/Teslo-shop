@@ -2,13 +2,21 @@ import { initialData } from "./seed";
 import prisma from "../lib/prisma";
 
 async function main() {
-  await Promise.all([
-    prisma.productImage.deleteMany(),
-    prisma.product.deleteMany(),
-    prisma.category.deleteMany(),
-  ]);
+  //1. Borrar todos los registros
 
-  const { categories, products } = initialData;
+  //await Promise.all([
+  await prisma.user.deleteMany();
+
+  await prisma.productImage.deleteMany();
+  await prisma.product.deleteMany();
+  await prisma.category.deleteMany();
+  //]);
+
+  const { categories, products, users } = initialData;
+
+  await prisma.user.createMany({
+    data: users,
+  });
 
   const categoriesData = categories.map((name) => ({ name }));
 
