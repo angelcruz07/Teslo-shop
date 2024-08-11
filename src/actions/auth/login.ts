@@ -1,14 +1,11 @@
 "use server";
 
 import { signIn } from "@/auth.config";
-import { sleep } from "@/utils";
-
 export async function authenticate(
   prevState: string | undefined,
   formData: FormData,
 ) {
   try {
-    //  sleep(2)
     await signIn("credentials", {
       ...Object.fromEntries(formData),
       redirect: false,
@@ -23,3 +20,17 @@ export async function authenticate(
     return "UnknownError";
   }
 }
+
+export const login = async (email: string, password: string) => {
+  try {
+    await signIn("credentials", { email, password });
+
+    return { ok: true };
+  } catch (error) {
+    console.error();
+    return {
+      ok: false,
+      message: "No se pudo iniciar sesion",
+    };
+  }
+};

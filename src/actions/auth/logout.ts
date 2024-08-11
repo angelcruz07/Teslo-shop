@@ -4,4 +4,5 @@ import { signOut } from "@/auth.config";
 
 export async function logout() {
   await signOut();
+  window.location.replace("/");
 }
