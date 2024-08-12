@@ -4,6 +4,10 @@ import { z } from "zod";
 import prisma from "./lib/prisma";
 import bcryptjs from "bcryptjs";
 
+const authenticatedRoutes = ["/auth/login", "/auth/new-account"];
+
+const checkoutAddressRoute = ["/checkout/address"];
+
 export const authConfig: NextAuthConfig = {
   pages: {
     signIn: "/auth/login",
@@ -11,6 +15,35 @@ export const authConfig: NextAuthConfig = {
   },
 
   callbacks: {
+    authorized({ auth, request: { nextUrl } }) {
+      //console.log({ auth });
+      const isLoggedIn = !!auth?.user;
+
+      // const isOnDashboard = nextUrl.pathname.startsWith('/dashboard');
+      const authRoutes = authenticatedRoutes.some((item) =>
+        nextUrl.pathname.includes(item),
+      );
+      const checkoutRoutes = checkoutAddressRoute.some((item) =>
+        nextUrl.pathname.includes(item),
+      );
+      // console.log({routesMatch})
+
+      if (authRoutes && isLoggedIn) {
+        return Response.redirect(new URL("/", nextUrl));
+      }
+
+      if (checkoutRoutes) {
+        if (isLoggedIn) {
+          return true;
+        }
+        return Response.redirect(
+          new URL(`/auth/login?origin=${nextUrl.pathname}`, nextUrl),
+        );
+      }
+
+      return true;
+    },
+
     jwt({ token, user }) {
       if (user) {
         token.data = user;
