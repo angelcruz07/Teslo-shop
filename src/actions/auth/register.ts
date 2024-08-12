@@ -2,11 +2,11 @@
 import prisma from "@/lib/prisma";
 import bcryptjs from "bcryptjs";
 
-export async function registerUser(
+export const registerUser = async (
   name: string,
   email: string,
   password: string,
-) {
+) => {
   try {
     const existingUser = await prisma.user.findUnique({
       where: { email: email.toLowerCase() },
@@ -19,7 +19,8 @@ export async function registerUser(
       };
     }
 
-    const hashedPassword = bcryptjs.hashSync(password, 10);
+    const hashedPassword = bcryptjs.hashSync(password);
+
     const user = await prisma.user.create({
       data: {
         name: name,
@@ -46,4 +47,4 @@ export async function registerUser(
       message: "No se pudo registrar al usuario",
     };
   }
-}
+};

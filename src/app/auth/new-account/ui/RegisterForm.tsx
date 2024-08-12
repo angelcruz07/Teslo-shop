@@ -1,4 +1,5 @@
 "use client";
+
 import { login, registerUser } from "@/actions";
 import clsx from "clsx";
 import Link from "next/link";
@@ -23,6 +24,7 @@ export const RegisterForm = () => {
     setErrorMessage("");
     const { name, email, password } = data;
 
+    //console.log({ name, email, password });
     // Server action
     const resp = await registerUser(name, email, password);
 
@@ -73,7 +75,7 @@ export const RegisterForm = () => {
           "border-red-500": errors.password,
         })}
         type="password"
-        {...(register("password"), { required: true, minLength: 6 })}
+        {...register("password", { required: true, minLength: 6 })}
       />
 
       <span className="text-red-500">{errorMessage}</span>
@@ -93,3 +95,4 @@ export const RegisterForm = () => {
     </form>
   );
 };
+
