@@ -12,7 +12,7 @@ interface ProductToOrder {
 
 export async function placeOrder(
   productIds: ProductToOrder[],
-  address: Address,
+  shippingAddress: Address,
 ) {
   const session = await auth();
   const userId = session?.user.id;
@@ -91,8 +91,7 @@ export async function placeOrder(
         }
       });
 
-      // 2. Crear la ordern - Encabezado - Detalles
-
+      // 2. Crear la order - Encabezado - Detalles
       const order = await tx.order.create({
         data: {
           userId: userId,
@@ -119,11 +118,12 @@ export async function placeOrder(
       // Validar si el precio es cero, entonces lanzar un error
 
       //3. Crear la direccion de la orden
-      const { country, ...restAddress } = address;
+      const { country: countryId, ...restShippingAddress } = shippingAddress;
+
       const orderAddress = await tx.orderAddress.create({
         data: {
-          ...restAddress,
-          countryId: country,
+          ...restShippingAddress,
+          countryId,
           orderId: order.id,
         },
       });

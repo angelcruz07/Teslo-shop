@@ -11,7 +11,18 @@ export const PlaceOrder = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [isPlacingOrder, setIsPlacingOrder] = useState(false);
 
-  const address = useAddressStore((state) => state.address);
+  //Sacar la direccion del envio
+  const shippingAddress = useAddressStore((state) => state.shippingAddress);
+  const {
+    city,
+    phone,
+    country,
+    address,
+    address2,
+    lastName,
+    firstName,
+    postalCode,
+  } = shippingAddress;
 
   const { itemsInCart, subTotal, tax, total } = useCartStore((state) =>
     state.getSummaryInformation(),
@@ -33,7 +44,7 @@ export const PlaceOrder = () => {
       size: product.size,
     }));
 
-    const res = await placeOrder(productsToOrder, address);
+    const res = await placeOrder(productsToOrder, shippingAddress);
 
     if (!res.ok) {
       setIsPlacingOrder(false);
@@ -55,15 +66,15 @@ export const PlaceOrder = () => {
 
       <div className="mb-10">
         <p className="text-xl">
-          Nombre: {address.firstName} {address.lastName}
+          Nombre: {firstName} {lastName}
         </p>
-        <p>Direccion: {address.address}</p>
-        <p>Direccion 2: {address.address2}</p>
-        <p>Codigo postal: {address.postalCode}</p>
+        <p>Direccion: {address}</p>
+        <p>Direccion 2: {address2}</p>
+        <p>Codigo postal: {postalCode}</p>
         <p>
-          Pais y Ciudad: {address.city}, {address.country}
+          Pais y Ciudad: {city}, {country}
         </p>
-        <p>Telefono: {address.phone}</p>
+        <p>Telefono: {phone}</p>
       </div>
 
       {/* Divider */}
@@ -105,7 +116,6 @@ export const PlaceOrder = () => {
         </p>
         <p className="text-red-500">{errorMessage}</p>
         <button
-          //href="/orders/123"
           onClick={onPlaceOrder}
           className="flex btn-primary justify-center"
         >

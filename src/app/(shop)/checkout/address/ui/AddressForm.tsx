@@ -1,6 +1,6 @@
 "use client";
 import { deleteUserAddress, setUserAddress } from "@/actions";
-import { Address, Country } from "@/interfaces";
+import { UserAddress, Country } from "@/interfaces";
 import { useAddressStore } from "@/store";
 import clsx from "clsx";
 import { useSession } from "next-auth/react";
@@ -8,24 +8,31 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
-interface FormInputs {
+type FormInputs = {
   firstName: string;
   lastName: string;
   address: string;
   address2?: string;
   postalCode: string;
   city: string;
-  country: string;
+  country: string; // this is a countryId like: "US"
   phone: string;
   rememberAddress: boolean;
-}
+};
 
 interface Props {
   countries: Country[];
-  userStoredAddress?: Partial<Address>;
+  userDbAddress?: Partial<UserAddress>;
 }
 
-export const AddressForm = ({ countries, userStoredAddress = {} }: Props) => {
+export const AddressForm = ({ countries, userDbAddress = {} }: Props) => {
+  const {
+    id, //Not use
+    userId, // Not use
+    countryId: country,
+    ...restUserDbAddress
+  } = userDbAddress;
+
   const router = useRouter();
   const {
     handleSubmit,
@@ -34,7 +41,8 @@ export const AddressForm = ({ countries, userStoredAddress = {} }: Props) => {
     reset,
   } = useForm<FormInputs>({
     defaultValues: {
-      ...(userStoredAddress as any),
+      ...restUserDbAddress,
+      country,
       rememberAddress: false,
     },
   });
@@ -44,20 +52,20 @@ export const AddressForm = ({ countries, userStoredAddress = {} }: Props) => {
   });
 
   const setAddress = useAddressStore((state) => state.setAddress);
-  const address = useAddressStore((state) => state.address);
+  const shippingAddress = useAddressStore((state) => state.shippingAddress);
 
   useEffect(() => {
-    if (address.firstName) {
-      reset(address);
+    if (shippingAddress.firstName) {
+      reset(shippingAddress);
     }
-  }, []);
+  }, [reset, shippingAddress]);
 
   const onSubmit = async (data: FormInputs) => {
-    const { rememberAddress, ...restAddress } = data;
-    setAddress(data);
+    const { rememberAddress, ...address } = data;
+    setAddress(address);
 
     if (rememberAddress) {
-      await setUserAddress(restAddress, session!.user.id);
+      await setUserAddress(address, session!.user.id);
     } else {
       //Eliminar la direccion de la base de datos
       //si el campo no esta marcado
