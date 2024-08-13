@@ -1,10 +1,14 @@
 "use client";
+import { placeOrder } from "@/actions";
 import { useAddressStore, useCartStore } from "@/store";
 import { currencyFormat } from "@/utils";
+import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
 export const PlaceOrder = () => {
+  const router = useRouter();
   const [loaded, setLoaded] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const [isPlacingOrder, setIsPlacingOrder] = useState(false);
 
   const address = useAddressStore((state) => state.address);
@@ -14,6 +18,7 @@ export const PlaceOrder = () => {
   );
 
   const cart = useCartStore((state) => state.cart);
+  const clearCart = useCartStore((state) => state.clearCart);
 
   useEffect(() => {
     setLoaded(true);
@@ -28,9 +33,17 @@ export const PlaceOrder = () => {
       size: product.size,
     }));
 
-    console.log({ address, productsToOrder });
+    const res = await placeOrder(productsToOrder, address);
 
-    //TODO: Server action
+    if (!res.ok) {
+      setIsPlacingOrder(false);
+      setErrorMessage(res.message);
+      return;
+    }
+
+    // Todo salio bien
+    clearCart();
+    router.replace("/orders/" + res.order?.id);
   };
   if (!loaded) {
     return <p>Cargando...</p>;
@@ -90,7 +103,7 @@ export const PlaceOrder = () => {
             </a>
           </span>
         </p>
-        <p className="text-red-500"></p>
+        <p className="text-red-500">{errorMessage}</p>
         <button
           //href="/orders/123"
           onClick={onPlaceOrder}
