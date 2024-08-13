@@ -1,6 +1,11 @@
 "use client";
-import { Country } from "@/interfaces";
+import { deleteUserAddress, setUserAddress } from "@/actions";
+import { Address, Country } from "@/interfaces";
+import { useAddressStore } from "@/store";
 import clsx from "clsx";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 interface FormInputs {
@@ -17,24 +22,50 @@ interface FormInputs {
 
 interface Props {
   countries: Country[];
+  userStoredAddress?: Partial<Address>;
 }
 
-export const AddressForm = ({ countries }: Props) => {
+export const AddressForm = ({ countries, userStoredAddress = {} }: Props) => {
+  const router = useRouter();
   const {
     handleSubmit,
     register,
     formState: { isValid },
+    reset,
   } = useForm<FormInputs>({
     defaultValues: {
       //TODO: Leer de la base de datos
+      ...(userStoredAddress as any),
+      rememberAddress: false,
     },
   });
 
-  const onSubmit = (data: FormInputs) => {
-    console.log(data);
-  };
+  const { data: session } = useSession({
+    required: true,
+  });
 
-  console.log(countries);
+  const setAddress = useAddressStore((state) => state.setAddress);
+  const address = useAddressStore((state) => state.address);
+
+  useEffect(() => {
+    if (address.firstName) {
+      reset(address);
+    }
+  }, []);
+
+  const onSubmit = async (data: FormInputs) => {
+    setAddress(data);
+    const { rememberAddress, ...restAddress } = data;
+
+    if (rememberAddress) {
+      await setUserAddress(restAddress, session!.user.id);
+    } else {
+      //Eliminar la direccion de la base de datos
+      //si el campo no esta marcado
+      await deleteUserAddress(session!.user.id);
+    }
+    router.push("/checkout");
+  };
 
   return (
     <form
@@ -153,10 +184,8 @@ export const AddressForm = ({ countries }: Props) => {
         </div>
 
         <button
-          //href="/checkout"
-          disabled={isValid}
+          disabled={!isValid}
           type="submit"
-          //className="btn-primary flex w-full sm:w-1/2 justify-center "
           className={clsx({
             "btn-primary": isValid,
             "btn-disabled": !isValid,
