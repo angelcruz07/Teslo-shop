@@ -1,5 +1,5 @@
 import { getOrderById } from "@/actions";
-import { Title } from "@/components";
+import { PayPalButton, Title } from "@/components";
 import { OrderStatus } from "@/components/orders/OrderStatus";
 import { currencyFormat } from "@/utils";
 import Image from "next/image";
@@ -85,15 +85,23 @@ export default async function OrderDetail({ params }: Props) {
                   : `${order!.itemsInOrder} articulos`}
               </span>
               <span className="">Subtotal</span>
-              <span className="text-right">{order!.subTotal}</span>
+              <span className="text-right">
+                {currencyFormat(order!.subTotal)}
+              </span>
               <span className="">Impuestos ($15) </span>
-              <span className="text-right">{order!.tax}</span>
+              <span className="text-right">{currencyFormat(order!.tax)}</span>
               <span className="text-2xl mt-5">Total</span>
-              <span className="mt-5 text-2xl text-right">{order!.total}</span>
+              <span className="mt-5 text-2xl text-right">
+                {currencyFormat(order!.total)}
+              </span>
             </div>
 
             <div className="mt-5">
-              <OrderStatus isPaid={order?.isPaid ?? false} />
+              {order?.isPaid ? (
+                <OrderStatus isPaid={order?.isPaid ?? false} />
+              ) : (
+                <PayPalButton amount={order!.total} orderId={order!.id} />
+              )}
             </div>
           </div>
         </div>
