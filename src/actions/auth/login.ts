@@ -22,7 +22,7 @@ export async function authenticate(
   }
 }
 
-export const login = async (email: string, password: string) => {
+export async function login(email: string, password: string) {
   try {
     await signIn("credentials", { email, password });
 
@@ -34,4 +34,4 @@ export const login = async (email: string, password: string) => {
       message: "No se pudo iniciar sesion",
     };
   }
-};
+}

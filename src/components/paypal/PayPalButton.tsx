@@ -15,6 +15,7 @@ interface Props {
 
 export const PayPalButton = ({ orderId, amount }: Props) => {
   const [{ isPending }] = usePayPalScriptReducer();
+  const roundedAmount = Math.round(amount * 100) / 100; //123.23
 
   if (isPending) {
     return (
@@ -36,16 +37,14 @@ export const PayPalButton = ({ orderId, amount }: Props) => {
       intent: "CAPTURE",
       purchase_units: [
         {
-          invoice_id: "order_id",
+          invoice_id: orderId,
           amount: {
-            value: `${amount}`,
+            value: `${roundedAmount}`,
             currency_code: "USD",
           },
         },
       ],
     });
-
-    console.log(transactionId);
 
     const { ok } = await setTransactionId(orderId, transactionId);
 
@@ -60,7 +59,9 @@ export const PayPalButton = ({ orderId, amount }: Props) => {
     const details = await actions.order?.capture();
 
     if (!details) return;
+    console.log(details);
 
+    //Error in id undefined
     await paypalCheckPayment(details.id); // Details is transactionId
   };
   return (

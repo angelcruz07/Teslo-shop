@@ -3,7 +3,7 @@
 import { Address } from "@/interfaces";
 import prisma from "@/lib/prisma";
 
-export const setUserAddress = async (address: Address, userId: string) => {
+export async function setUserAddress(address: Address, userId: string) {
   try {
     const newAddress = await createOrReplaceAddress(address, userId);
 
@@ -18,7 +18,7 @@ export const setUserAddress = async (address: Address, userId: string) => {
       message: "No se pudo guardar la direccion",
     };
   }
-};
+}
 
 async function createOrReplaceAddress(address: Address, userId: string) {
   try {

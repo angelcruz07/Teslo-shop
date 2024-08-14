@@ -1,6 +1,6 @@
-export * from "./auth/login";
-export * from "./auth/logout";
-export * from "./auth/register";
+export { authenticate, login } from "./auth/login";
+export { logout } from "./auth/logout";
+export { registerUser } from "./auth/register";
 
 export * from "./address/delete-user-address";
 export * from "./address/get-user-address";

@@ -9,11 +9,11 @@ importers:
   .:
     dependencies:
       '@paypal/paypal-js':
-        specifier: ^8.1.0
+        specifier: ^8.0.5
         version: 8.1.0
       '@paypal/react-paypal-js':
-        specifier: ^8.5.0
-        version: 8.5.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 8.2.0
+        version: 8.2.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@prisma/client':
         specifier: 5.17.0
         version: 5.17.0(prisma@5.17.0)
@@ -246,8 +246,8 @@ packages:
   '@paypal/paypal-js@8.1.0':
     resolution: {integrity: sha512-f64bom5xYwmxyeKPJUFS/XpM0tXojQEgjRIADPqe1R9WmK+PFqL4SEkT85cGU0ZXLVx4EGbjwREHhqEOR+OstA==}
 
-  '@paypal/react-paypal-js@8.5.0':
-    resolution: {integrity: sha512-YIAyLw4OiUoHHoUgXvibrBDdluzqnqVMGsJXyBcoOzlWHQIe5zhh8dgYezNNRXjXwy6t22YmPljjw7lr+eD9cw==}
+  '@paypal/react-paypal-js@8.2.0':
+    resolution: {integrity: sha512-SworUfu0BNNcqoh0O53Ke4MFpx2m3qJRu3hayXvlluEEXJpKqGSV5aaSGFhbsZqi8hnbsx/hZR7BQbmqsggiGQ==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -1918,7 +1918,7 @@ snapshots:
     dependencies:
       promise-polyfill: 8.3.0
 
-  '@paypal/react-paypal-js@8.5.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@paypal/react-paypal-js@8.2.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@paypal/paypal-js': 8.1.0
       '@paypal/sdk-constants': 1.0.149
