@@ -121,9 +121,11 @@ async function uploadImages(images: File[]) {
         const buffer = await image.arrayBuffer();
         const base64Image = Buffer.from(buffer).toString("base64");
 
-        return cloudinary.uploader
-          .upload(`data:image/png/;base64,${base64Image}`)
+        const res = cloudinary.uploader
+          .upload(`data:image/png;base64,${base64Image}`)
           .then((res) => res.secure_url);
+
+        console.log(res);
       } catch (e) {
         console.log(e);
         return null;

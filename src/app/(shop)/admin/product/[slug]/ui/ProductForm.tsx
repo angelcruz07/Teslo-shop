@@ -3,8 +3,8 @@
 import { createUpdateProduct, deleteProductImage } from "@/actions";
 import { ProductImage } from "@/components";
 import {
-  Product,
   Category,
+  Product,
   ProductImage as ProductWithImage,
 } from "@/interfaces";
 import clsx from "clsx";
@@ -223,7 +223,7 @@ export const ProductForm = ({ product, categories }: Props) => {
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {product.ProductImage?.map((image) => (
-              <div key="image.id">
+              <div key={image.id}>
                 <ProductImage
                   alt={product.title ?? ""}
                   src={image.url}
