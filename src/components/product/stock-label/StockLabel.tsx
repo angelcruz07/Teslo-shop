@@ -1,7 +1,6 @@
 "use client";
 import { getStockBySlug } from "@/actions";
 import { titleFont } from "@/config/fonts";
-// import { sleep } from "@/utils";
 import { useEffect, useState } from "react";
 
 interface Props {
@@ -13,16 +12,15 @@ export const StockLabel = ({ slug }: Props) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    const getStock = async () => {
+      const inStock = await getStockBySlug(slug);
+
+      setStock(inStock);
+      setIsLoading(false);
+    };
+
     getStock();
-  }, []);
-
-  const getStock = async () => {
-    // await sleep(3);
-    const inStock = await getStockBySlug(slug);
-
-    setStock(inStock);
-    setIsLoading(false);
-  };
+  }, [slug]);
 
   return (
     <>

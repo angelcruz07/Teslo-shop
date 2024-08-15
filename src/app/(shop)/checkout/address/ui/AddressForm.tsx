@@ -67,8 +67,6 @@ export const AddressForm = ({ countries, userDbAddress = {} }: Props) => {
     if (rememberAddress) {
       await setUserAddress(address, session!.user.id);
     } else {
-      //Eliminar la direccion de la base de datos
-      //si el campo no esta marcado
       await deleteUserAddress(session!.user.id);
     }
     router.push("/checkout");
