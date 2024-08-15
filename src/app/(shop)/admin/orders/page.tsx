@@ -1,12 +1,12 @@
 export const revalidate = 0;
-import { getOrdersByUser } from "@/actions";
+import { getPaginatedOrders } from "@/actions";
 import { Title } from "@/components";
 import { IconCreditCard } from "@tabler/icons-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
-export default async function Orders() {
-  const { ok, orders = [] } = await getOrdersByUser();
+export default async function Admin() {
+  const { ok, orders = [] } = await getPaginatedOrders();
 
   if (!ok) {
     redirect("/auth/login");
@@ -14,7 +14,8 @@ export default async function Orders() {
 
   return (
     <>
-      <Title title="Orders" />
+      <Title title="Todas las ordenes" />
+
       <div className="mb-10">
         <table className="min-w-full">
           <thead className="bg-gray-200 border-b">

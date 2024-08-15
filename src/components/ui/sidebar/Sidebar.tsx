@@ -115,7 +115,8 @@ export const Sidebar = () => {
             <div className="w-full h-px bg-gray-200 my-10" />
 
             <Link
-              href="/"
+              href="/admin/products"
+              onClick={closeMenu}
               className="flex items-center mt-0 p-2 hover:bg-gray-100 rounded transition-all"
             >
               <IconShirt stroke={2} size={20} />
@@ -123,7 +124,8 @@ export const Sidebar = () => {
             </Link>
 
             <Link
-              href="/orders/"
+              href="/admin/orders/"
+              onClick={closeMenu}
               className="flex items-center mt-0 p-2 hover:bg-gray-100 rounded transition-all"
             >
               <IconTicket stroke={2} size={20} />
@@ -131,7 +133,8 @@ export const Sidebar = () => {
             </Link>
 
             <Link
-              href="/"
+              href="/admin/users/"
+              onClick={closeMenu}
               className="flex items-center mt-0 p-2 hover:bg-gray-100 rounded transition-all"
             >
               <IconUsers stroke={2} size={20} />
