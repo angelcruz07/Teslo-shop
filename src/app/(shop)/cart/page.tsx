@@ -1,7 +1,7 @@
 import { Title } from "@/components";
 import Link from "next/link";
-import { ProductsInCart } from "./ui/ProductsInCart";
 import { OrderSummary } from "./ui/OrderSummary";
+import { ProductsInCart } from "./ui/ProductsInCart";
 
 export default function Cart() {
   return (
@@ -22,7 +22,7 @@ export default function Cart() {
 
           {/* Checkout */}
           <div className="bg-white rounded-xl shadow-xl p-7">
-            <h2 className="text-2xl mb-2 "> Resumen de orden</h2>
+            <h2 className="text-2xl mb-2 ">Resumen de orden</h2>
 
             <OrderSummary />
 
@@ -31,7 +31,7 @@ export default function Cart() {
                 href="/checkout/address"
                 className="flex btn-primary justify-center"
               >
-                Checkout
+                Hacer pedido
               </Link>
             </div>
           </div>

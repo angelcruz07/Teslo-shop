@@ -1,7 +1,7 @@
+import { Providers } from "@/components";
 import { inter } from "@/config/fonts";
 import type { Metadata } from "next";
 import "./globals.css";
-import { Providers } from "@/components";
 
 export const metadata: Metadata = {
   title: {
