@@ -115,6 +115,13 @@ export const Sidebar = () => {
             <div className="w-full h-px bg-gray-200 my-10" />
 
             <Link
+              className="flex items-center mt-0 p-2 hover:bg-gray-100 rounded transition-all"
+              href="/admin/"
+              onClick={closeMenu}
+            >
+              <span className="ml-3 text-xl">Panel de administracion</span>
+            </Link>
+            <Link
               href="/admin/products"
               onClick={closeMenu}
               className="flex items-center mt-0 p-2 hover:bg-gray-100 rounded transition-all"

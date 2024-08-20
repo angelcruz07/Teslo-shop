@@ -1,4 +1,4 @@
-import { getOrderById } from "@/actions";
+import { getOrderById, getShipment } from "@/actions";
 import { PayPalButton, Title } from "@/components";
 import { OrderStatus } from "@/components/orders/OrderStatus";
 import { currencyFormat } from "@/utils";
@@ -21,6 +21,20 @@ export default async function OrderDetail({ params }: Props) {
   }
 
   const shippingAddress = order!.OrderAddress;
+
+  const originAddress = {
+    postalCode: "50000",
+    countryCode: "MX",
+  };
+
+  const destinationAddress = {
+    postalCode: shippingAddress!.postalCode,
+    countryCode: shippingAddress!.countryId,
+  };
+
+  const shipment = await getShipment(originAddress, destinationAddress);
+
+  console.log(shipment.DHL);
 
   return (
     <div className="flex justify-center items-center mb-72 px-10 sm:px-0">
@@ -58,6 +72,7 @@ export default async function OrderDetail({ params }: Props) {
           </div>
 
           {/* Checkout */}
+
           <div className="bg-white rounded-xl shadow-xl p-7">
             <h2 className="text-2xl mb-2 font-bold">Direccion de entrega</h2>
             <div className="mb-10">
