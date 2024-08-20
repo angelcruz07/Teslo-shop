@@ -1,5 +1,5 @@
 import { auth } from "@/auth.config";
-import Link from "next/link";
+import { DasboardNav } from "@/components";
 import { redirect } from "next/navigation";
 
 export default async function AdminLayout({
@@ -14,11 +14,8 @@ export default async function AdminLayout({
   }
 
   return (
-    <main className="flex bg-zinc-100">
-      <nav className="h-screen w-14">
-        <Link href="">Inicio</Link>
-      </nav>
-
+    <main className="flex flex-col">
+      <DasboardNav />
       {children}
     </main>
   );

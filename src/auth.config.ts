@@ -1,8 +1,8 @@
+import bcryptjs from "bcryptjs";
 import NextAuth, { type NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { z } from "zod";
 import prisma from "./lib/prisma";
-import bcryptjs from "bcryptjs";
 
 const authenticatedRoutes = ["/auth/login", "/auth/new-account"];
 
@@ -16,16 +16,18 @@ export const authConfig: NextAuthConfig = {
 
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
-      //console.log({ auth });
       const isLoggedIn = !!auth?.user;
 
       // const isOnDashboard = nextUrl.pathname.startsWith('/dashboard');
+
       const authRoutes = authenticatedRoutes.some((item) =>
         nextUrl.pathname.includes(item),
       );
+
       const checkoutRoutes = checkoutAddressRoute.some((item) =>
         nextUrl.pathname.includes(item),
       );
+
       // console.log({routesMatch})
 
       if (authRoutes && isLoggedIn) {
@@ -56,6 +58,7 @@ export const authConfig: NextAuthConfig = {
       return session;
     },
   },
+
   providers: [
     Credentials({
       async authorize(credentials) {
@@ -75,6 +78,7 @@ export const authConfig: NextAuthConfig = {
         if (!user) return null;
 
         if (!bcryptjs.compareSync(password, user.password)) return null;
+
         // Regresar al usuario sin el password
         const { password: _, ...rest } = user;
 

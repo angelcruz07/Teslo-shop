@@ -56,8 +56,8 @@ export const Sidebar = () => {
         />
 
         {/* Input search */}
-        <div className="relative mt-10 h-10 flex items-center justify-center">
-          <IconSearch stroke={2} size={15} className="absolute top-3 left-2" />
+        <div className="relative my-10 h-10 flex items-center justify-center">
+          <IconSearch stroke={2} size={20} className="absolute top-3 left-2" />
           <input
             type="text"
             placeholder="Buscar"
@@ -105,7 +105,7 @@ export const Sidebar = () => {
             onClick={() => closeMenu()}
           >
             <IconLogin stroke={2} size={20} />
-            <span className="ml-3 text-xl">Ingresar</span>
+            <span className="ml-3 text-xl">Iniciar sesion</span>
           </Link>
         )}
 
@@ -116,13 +116,14 @@ export const Sidebar = () => {
 
             <Link
               className="flex items-center mt-0 p-2 hover:bg-gray-100 rounded transition-all"
-              href="/admin/"
+              href="/dashboard"
               onClick={closeMenu}
             >
+              <IconUsers stroke={2} size={20} />
               <span className="ml-3 text-xl">Panel de administracion</span>
             </Link>
             <Link
-              href="/admin/products"
+              href="/dashboard/products"
               onClick={closeMenu}
               className="flex items-center mt-0 p-2 hover:bg-gray-100 rounded transition-all"
             >
@@ -131,7 +132,7 @@ export const Sidebar = () => {
             </Link>
 
             <Link
-              href="/admin/orders/"
+              href="/dashboard/orders/"
               onClick={closeMenu}
               className="flex items-center mt-0 p-2 hover:bg-gray-100 rounded transition-all"
             >
@@ -140,7 +141,7 @@ export const Sidebar = () => {
             </Link>
 
             <Link
-              href="/admin/users/"
+              href="/dashboard/users/"
               onClick={closeMenu}
               className="flex items-center mt-0 p-2 hover:bg-gray-100 rounded transition-all"
             >
