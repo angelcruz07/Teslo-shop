@@ -2,8 +2,9 @@
 import { placeOrder } from "@/actions";
 import { useAddressStore, useCartStore } from "@/store";
 import { currencyFormat } from "@/utils";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export const PlaceOrder = () => {
   const router = useRouter();
@@ -62,25 +63,32 @@ export const PlaceOrder = () => {
 
   return (
     <div className="bg-white rounded-xl shadow-xl p-7">
-      <h2 className="text-2xl mb-2 font-bold">Direccion de entrega</h2>
+      <h2 className="text-2xl mb-5 font-bold">Direccion de entrega</h2>
 
-      <div className="mb-10">
-        <p className="text-xl">
-          Nombre: {firstName} {lastName}
-        </p>
-        <p>Direccion: {address}</p>
-        <p>Direccion 2: {address2}</p>
-        <p>Codigo postal: {postalCode}</p>
+      <div className="mb-5">
         <p>
-          Pais y Ciudad: {city}, {country}
+          <strong>Nombre:</strong> {firstName} {lastName}
         </p>
-        <p>Telefono: {phone}</p>
+        <p>
+          <strong>Direccion:</strong> {address}
+        </p>
+        <p>
+          <strong>Direccion 2:</strong> {address2}
+        </p>
+        <p>
+          <strong>Codigo postal:</strong> {postalCode}
+        </p>
+        <p>
+          <strong>Pais y Ciudad:</strong> {city}, {country}
+        </p>
+        <p>
+          <strong>Telefono:</strong> {phone}
+        </p>
       </div>
 
       {/* Divider */}
       <div className="h-0.5 w-full bg-gray-200 mb-10" />
-
-      <h2 className="text-2xl mb-2 "> Resumen de orden</h2>
+      <h2 className="text-2xl mb-2 font-bold">Resumen de orden</h2>
 
       <div className="grid grid-cols-2">
         <span>No. Productos</span>
@@ -104,20 +112,18 @@ export const PlaceOrder = () => {
         <p className="mb-5">
           {/* Disclaimer */}
           <span className="text-xs">
-            Al hacer clic en &quot;Colocar orden&quot;, aceptas nuestros
-            <a href="#" className="underline">
+            Al hacer clic en &quot;Colocar orden&quot; aceptas nuestros
+            <Link href="/" className="underline">
+              <span> </span>
               términos y condiciones
-            </a>
-            y
-            <a href="#" className="underline">
-              política de privacidad
-            </a>
+            </Link>
           </span>
         </p>
-        <p className="text-red-500">{errorMessage}</p>
+        <p className="text-red-500 mb-5">{errorMessage}</p>
         <button
           onClick={onPlaceOrder}
-          className="flex btn-primary justify-center"
+          className="flex btn-primary justify-center
+          "
         >
           Colocar orden
         </button>

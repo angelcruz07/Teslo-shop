@@ -43,7 +43,7 @@ export const AddressForm = ({ countries, userDbAddress = {} }: Props) => {
     defaultValues: {
       ...restUserDbAddress,
       country,
-      rememberAddress: false,
+      rememberAddress: true,
     },
   });
 
@@ -96,7 +96,7 @@ export const AddressForm = ({ countries, userDbAddress = {} }: Props) => {
       </div>
 
       <div className="flex flex-col mb-2">
-        <span>Dirección</span>
+        <span>Calle, Numero Exterior, Numero Interior</span>
         <input
           type="text"
           className="p-2 border rounded-md bg-gray-200"
@@ -185,7 +185,7 @@ export const AddressForm = ({ countries, userDbAddress = {} }: Props) => {
               </svg>
             </div>
           </label>
-          <span>Recordar esta direccion?</span>
+          <span>Quieres recodar esta direccion para futuras compras?</span>
         </div>
 
         <button

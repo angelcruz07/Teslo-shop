@@ -33,10 +33,11 @@ export const ProductsInCart = () => {
             className="mr-5 rounded"
           />
 
-          <div>
+          <div className="flex flex-col gap-y-3">
             <span>
-              {product.size} - {product.title} ({product.quantity})
+              {product.title} * ({product.quantity})
             </span>
+            <span>Talla: {product.size}</span>
 
             <p className="font-bold">
               {currencyFormat(product.price * product.quantity)}

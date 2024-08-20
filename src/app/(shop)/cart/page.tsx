@@ -21,11 +21,11 @@ export default function Cart() {
           </div>
 
           {/* Checkout */}
-          <div className="bg-white rounded-xl shadow-xl p-7">
-            <h2 className="text-2xl mb-2 ">Resumen de orden</h2>
-
-            <OrderSummary />
-
+          <div className="bg-white flex flex-col justify-between rounded-xl shadow-xl p-7">
+            <div>
+              <h2 className="text-2xl mb-2 ">Resumen de orden</h2>
+              <OrderSummary />
+            </div>
             <div>
               <Link
                 href="/checkout/address"

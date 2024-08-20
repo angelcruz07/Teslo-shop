@@ -1,6 +1,6 @@
 import { Title } from "@/components";
 import Link from "next/link";
-import { ProductsInCart } from "./ui/products-incart/ProductsInCart";
+import { ProductsInCart } from "./ui/products-in-cart/ProductsInCart";
 import { PlaceOrder } from "./ui/place-order/PlaceOrder";
 
 export default function Checkout() {
@@ -13,7 +13,7 @@ export default function Checkout() {
           {/* Cart */}
 
           <div className="flex flex-col mt-5 ">
-            <span className="text-xl">Ajustar elementos</span>
+            <span className="text-xl">Cambiar articulos</span>
             <Link href="/cart" className="underline mb-5">
               Editar carrito
             </Link>
