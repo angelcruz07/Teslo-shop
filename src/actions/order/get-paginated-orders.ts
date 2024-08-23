@@ -14,6 +14,9 @@ export async function getPaginatedOrders() {
   }
 
   const orders = await prisma.order.findMany({
+    where: {
+      isPaid: true,
+    },
     orderBy: {
       createdAt: "desc",
     },

@@ -29,7 +29,9 @@ export async function getPaginatedProductsWithImages({
           },
         },
       },
+
       take: take,
+
       skip: (page - 1) * take,
 
       where: {
@@ -37,7 +39,6 @@ export async function getPaginatedProductsWithImages({
       },
     });
 
-    //todo :
     const totalCount = await prisma.product.count({
       where: {
         gender: gender,
@@ -55,6 +56,6 @@ export async function getPaginatedProductsWithImages({
       })),
     };
   } catch (error) {
-    throw new Error("No se pudo cargar los productos");
+    throw new Error("No se puden cargar los productos");
   }
 }

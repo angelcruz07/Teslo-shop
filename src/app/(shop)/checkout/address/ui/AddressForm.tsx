@@ -1,24 +1,14 @@
 "use client";
 import { deleteUserAddress, setUserAddress } from "@/actions";
-import { UserAddress, Country } from "@/interfaces";
+import { Country, UserAddress } from "@/interfaces";
 import { useAddressStore } from "@/store";
 import clsx from "clsx";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-
-type FormInputs = {
-  firstName: string;
-  lastName: string;
-  address: string;
-  address2?: string;
-  postalCode: string;
-  city: string;
-  country: string; // this is a countryId like: "US"
-  phone: string;
-  rememberAddress: boolean;
-};
+import { InputForm } from "./componets";
+import { FormInputs } from "./models";
 
 interface Props {
   countries: Country[];
@@ -77,62 +67,24 @@ export const AddressForm = ({ countries, userDbAddress = {} }: Props) => {
       onSubmit={handleSubmit(onSubmit)}
       className="grid grid-cols-1 gap-2 sm:gap-5 sm:grid-cols-2"
     >
+      <InputForm label="Nombres" name="firstName" register={register} />
+      <InputForm label="Apellidos" name="lastName" register={register} />
+      <InputForm
+        label="Calle, Numero exterior, Numero interior"
+        name="address"
+        register={register}
+      />
+      <InputForm
+        label="Direccion 2"
+        name="address2"
+        register={register}
+        required={false}
+      />
+      <InputForm label="Código postal" name="postalCode" register={register} />
+      <InputForm label="Ciudad" name="city" register={register} />
+      <InputForm label="Telefono" name="phone" register={register} />
       <div className="flex flex-col mb-2">
-        <span>Nombres</span>
-        <input
-          type="text"
-          className="p-2 border rounded-md bg-gray-200"
-          {...register("firstName", { required: true })}
-        />
-      </div>
-
-      <div className="flex flex-col mb-2">
-        <span>Apellidos</span>
-        <input
-          type="text"
-          className="p-2 border rounded-md bg-gray-200"
-          {...register("lastName", { required: true })}
-        />
-      </div>
-
-      <div className="flex flex-col mb-2">
-        <span>Calle, Numero Exterior, Numero Interior</span>
-        <input
-          type="text"
-          className="p-2 border rounded-md bg-gray-200"
-          {...register("address", { required: true })}
-        />
-      </div>
-
-      <div className="flex flex-col mb-2">
-        <span>Dirección 2 (opcional)</span>
-        <input
-          type="text"
-          className="p-2 border rounded-md bg-gray-200"
-          {...register("address2")}
-        />
-      </div>
-
-      <div className="flex flex-col mb-2">
-        <span>Código postal</span>
-        <input
-          type="text"
-          className="p-2 border rounded-md bg-gray-200"
-          {...register("postalCode", { required: true })}
-        />
-      </div>
-
-      <div className="flex flex-col mb-2">
-        <span>Ciudad</span>
-        <input
-          type="text"
-          className="p-2 border rounded-md bg-gray-200"
-          {...register("city", { required: true })}
-        />
-      </div>
-
-      <div className="flex flex-col mb-2">
-        <span>País</span>
+        <label>País</label>
         <select
           className="p-2 border rounded-md bg-gray-200"
           {...register("country", { required: true })}
@@ -144,15 +96,6 @@ export const AddressForm = ({ countries, userDbAddress = {} }: Props) => {
             </option>
           ))}
         </select>
-      </div>
-
-      <div className="flex flex-col mb-2">
-        <span>Teléfono</span>
-        <input
-          type="text"
-          className="p-2 border rounded-md bg-gray-200"
-          {...register("phone", { required: true })}
-        />
       </div>
 
       <div className="flex flex-col mb-2 sm:mt-1">

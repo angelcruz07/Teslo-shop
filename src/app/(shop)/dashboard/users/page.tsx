@@ -13,11 +13,11 @@ export default async function Admin() {
 
   return (
     <>
-      <Title title="Todas las ordenes" />
+      <Title title="Todos los usuarios" />
 
       <div className="mb-10">
         <UsersTable users={users} />
-        <Pagination totalPages={1} />
+        <Pagination totalPages={2} />
       </div>
     </>
   );

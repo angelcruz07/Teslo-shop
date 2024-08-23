@@ -24,7 +24,7 @@ export default async function ProductsAdmin({ searchParams }: Props) {
 
       <div className="flex justify-end mb-5">
         <Link href="/dashboard/product/new" className="btn-primary">
-          Nuevo Producto
+          Agrear nuevo producto
         </Link>
       </div>
 
@@ -70,6 +70,7 @@ export default async function ProductsAdmin({ searchParams }: Props) {
               </th>
             </tr>
           </thead>
+
           <tbody>
             {products.map((product) => (
               <tr

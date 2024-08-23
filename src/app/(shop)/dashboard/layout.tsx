@@ -1,6 +1,11 @@
 import { auth } from "@/auth.config";
 import { DasboardNav } from "@/components";
+import { Metadata } from "next";
 import { redirect } from "next/navigation";
+
+export const metadata: Metadata = {
+  title: "Dasboard",
+};
 
 export default async function AdminLayout({
   children,
