@@ -24,6 +24,7 @@ export const DasboardNav = () => {
     <nav className="space-x-5 font-semibold mt-5">
       {ROUTES_NAVBAR.map((route) => (
         <Link
+          key={route.path}
           href={route.path}
           className="hover:bg-gray-100 px-5 py-2 rounded-md transition-all"
         >

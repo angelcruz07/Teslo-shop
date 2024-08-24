@@ -32,9 +32,9 @@ export default async function OrderDetail({ params }: Props) {
     countryCode: shippingAddress!.countryId,
   };
 
-  const shipment = await getShipment(originAddress, destinationAddress);
+  //  const shipment = await getShipment(originAddress, destinationAddress);
 
-  console.log(shipment.DHL);
+  // console.log(shipment.DHL);
 
   return (
     <div className="flex justify-center items-center mb-72 px-10 sm:px-0">
