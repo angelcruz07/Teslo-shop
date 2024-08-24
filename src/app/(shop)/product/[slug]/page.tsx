@@ -20,6 +20,7 @@ interface Props {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const slug = params.slug;
   const product = await getProductBySlug(slug);
+  console.log(product?.images[1]);
 
   // const previousImages = (await parent).openGraph?.images || [];
 
@@ -29,8 +30,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: product?.title ?? "Producto no encontrado",
       description: product?.description ?? "",
-      // images: [], // https://misitioweb.com/products/image.png
-      images: [`/products/${product?.images[1]}`],
+      images: [
+        `${process.env.NEXT_PUBLIC_SITE_URL}/products/${product?.images?.[1]}`,
+      ],
     },
   };
 }
